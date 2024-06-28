@@ -13,9 +13,10 @@ This is a simple Password Manager App developed using Kotlin, Jetpack Compose, a
 
 ## Screenshots
 
-<!-- Add screenshots of your app here -->
-<!-- ![Home Screen](path/to/screenshot1.png) -->
-<!-- ![Add/Edit Password](path/to/screenshot2.png) -->
+<img src = "https://github.com/ayush19sinha/PasswordManagerApp/assets/143383811/b84d4d9c-d485-4719-91d3-482d715aef10" width = "180">
+<img src = "https://github.com/ayush19sinha/PasswordManagerApp/assets/143383811/2d57fe9a-05ff-41cc-a376-5a2787143f6e" width = "180">
+<img src = "https://github.com/ayush19sinha/PasswordManagerApp/assets/143383811/038f593f-52bb-4d1a-9937-c177f1d93893" width = "180">
+<img src = "https://github.com/ayush19sinha/PasswordManagerApp/assets/143383811/c2912ceb-db22-4d03-967d-5b24f1828920" width = "180">
 
 ## Getting Started
 
