@@ -1,12 +1,15 @@
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -126,14 +129,7 @@ fun AddEditPasswordScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            PasswordStrengthMeter(calculatePasswordStrength(passwordValue))
-        }
+        PasswordStrengthIndicator(passwordValue = passwordValue)
 
         if (passwordError.isNotEmpty()) {
             Text(
@@ -217,7 +213,9 @@ fun generateRandomPassword(length: Int = 12): String {
 }
 
 @Composable
-fun PasswordStrengthMeter(strength: Int) {
+fun PasswordStrengthIndicator(passwordValue: String) {
+    val strength = calculatePasswordStrength(passwordValue)
+    val strengthText = getPasswordStrengthText(strength)
     val color = when (strength) {
         0 -> Color.Red
         1 -> Color(0xFFFFA500)
@@ -225,10 +223,46 @@ fun PasswordStrengthMeter(strength: Int) {
         3 -> Color.Green
         else -> Color(0xFF0C7704)
     }
-    Box(
+
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(8.dp)
-            .background(color)
-    )
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier = Modifier
+                .weight(1f)
+                .height(10.dp)
+        ) {
+            (0 until 4).forEach { index ->
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .background(if (index < strength) color else Color.Gray)
+                )
+                if (index < 3) {
+                    Spacer(modifier = Modifier.width(4.dp))
+                }
+            }
+        }
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = strengthText,
+            modifier = Modifier.weight(.5f),
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}
+
+fun getPasswordStrengthText(strength: Int): String {
+    return when (strength) {
+        0 -> ""
+        1 -> "Weak"
+        2 -> "Could be stronger"
+        3 -> "Strong Password"
+        else -> "Very Strong"
+
+    }
 }
